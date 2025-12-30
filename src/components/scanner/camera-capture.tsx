@@ -245,7 +245,7 @@ export function CameraCapture({ onCapture, onCancel, disabled }: CameraCapturePr
                             <Button
                                 onClick={startCamera}
                                 className="w-full"
-                                variant="outline"
+                                /* variant="outline" */
                                 disabled={capturedImages.length >= 3}
                             >
                                 <Plus className="w-4 h-4 mr-2" />
