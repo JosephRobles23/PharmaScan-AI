@@ -115,14 +115,23 @@ function extractProductData(text: string): {
     ];
 
     // Date patterns
+    // Date patterns
     const datePatterns = [
-        // V, EXP, VTO, VENCE, CAD followed by date
+        // Spanish Months: ABR2026, NOV 2024, ENE.25
+        /\b(ENE|FEB|MAR|ABR|MAY|JUN|JUL|AGO|SEP|OCT|NOV|DIC)[A-Z]*\.?\s*(\d{2,4})\b/i,
+
+        // V, EXP, VTO... followed by date
         /(?:|V|EXP|VTO|VENCE|CAD|CADUCIDAD|EXPIRY|EXPIRA)[\s:.-]*(\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4})/i,
         /(?:|V|EXP|VTO|VENCE|CAD|CADUCIDAD|EXPIRY|EXPIRA)[\s:.-]*(\d{1,2}[\/\-\.]\d{2,4})/i,
+
+        // LOT + Numeric Date Sequence (e.g., 2123764 12 27 -> Month 12 Year 27)
+        // Look for digits followed by spaces then MM YY
+        /\b\d{4,}\s+(\d{1,2})\s+(\d{2})\b/,
+
         // Standalone dates
         /\b(\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4})\b/,
         /\b(\d{1,2}[\/\-\.]\d{4})\b/,
-        // YYYY-MM-DD format
+        // YYYY-MM-DD
         /\b(\d{4}[\/\-\.]\d{1,2}[\/\-\.]\d{1,2})\b/,
     ];
 
@@ -139,15 +148,38 @@ function extractProductData(text: string): {
     }
 
     // Search for expiration date
+    // Normalize newlines to spaces for multiline regex support
     const fullText = text.replace(/\n/g, ' ');
+
     for (const pattern of datePatterns) {
         const match = fullText.match(pattern);
         if (match) {
-            const parsedDate = parseExpirationDate(match[1]);
-            if (parsedDate) {
-                // Format as YYYY-MM-DD for database storage
-                expirationDate = parsedDate.toISOString().split('T')[0];
-                break;
+            // Case 1: Spanish Month (Match 1=Month, Match 2=Year)
+            if (match.length === 3 && isNaN(Number(match[1]))) {
+                const dateStr = `${match[1]} ${match[2]}`;
+                const parsedDate = parseExpirationDate(dateStr);
+                if (parsedDate) {
+                    expirationDate = parsedDate.toISOString().split('T')[0];
+                    break;
+                }
+            }
+            // Case 2: Numeric Sequence (Match 1=Month, Match 2=Year) - e.g. "12 27"
+            else if (match.length === 3 && !isNaN(Number(match[1]))) {
+                const dateStr = `${match[1]}/${match[2]}`; // Convert 12 27 to 12/27
+                const parsedDate = parseExpirationDate(dateStr);
+                if (parsedDate) {
+                    expirationDate = parsedDate.toISOString().split('T')[0];
+                    break;
+                }
+            }
+            // Case 3: Standard Single Match
+            else {
+                const parsedDate = parseExpirationDate(match[1]);
+                if (parsedDate) {
+                    // Format as YYYY-MM-DD for database storage
+                    expirationDate = parsedDate.toISOString().split('T')[0];
+                    break;
+                }
             }
         }
     }

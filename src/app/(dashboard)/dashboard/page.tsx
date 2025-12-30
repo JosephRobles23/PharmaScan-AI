@@ -109,86 +109,86 @@ export default function DashboardPage() {
     }
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-4">
             {/* Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div>
-                    <h1 className="text-3xl font-bold text-black dark:text-white tracking-tight">
+                    <h1 className="text-2xl font-bold text-black dark:text-white tracking-tight">
                         Hola, {userName} 👋
                     </h1>
-                    <p className="text-[#8E8E93] mt-1">
-                        Aquí tienes el resumen de tu inventario
+                    <p className="text-[#8E8E93] text-sm mt-0.5">
+                        Resumen de tu inventario
                     </p>
                 </div>
                 <Link href="/scan">
-                    <Button size="lg">
-                        <ScanLine className="w-5 h-5 mr-2" />
+                    <Button size="default">
+                        <ScanLine className="w-4 h-4 mr-2" />
                         Nuevo Escaneo
                     </Button>
                 </Link>
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                 <Card>
-                    <CardContent className="p-5">
-                        <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-500/20 flex items-center justify-center">
-                                <Package className="w-6 h-6 text-[#0066CC]" />
+                    <CardContent className="p-4">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-500/20 flex items-center justify-center">
+                                <Package className="w-5 h-5 text-[#0066CC]" />
                             </div>
                             <div>
-                                <p className="text-2xl font-bold text-[#0F172A] dark:text-[#F1F5F9]">
+                                <p className="text-xl font-bold text-[#0F172A] dark:text-[#F1F5F9]">
                                     {stats.totalProducts}
                                 </p>
-                                <p className="text-sm text-[#64748B]">Productos</p>
+                                <p className="text-xs text-[#64748B]">Productos</p>
                             </div>
                         </div>
                     </CardContent>
                 </Card>
 
                 <Card>
-                    <CardContent className="p-5">
-                        <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-green-100 dark:bg-green-500/20 flex items-center justify-center">
-                                <TrendingUp className="w-6 h-6 text-[#10B981]" />
+                    <CardContent className="p-4">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-500/20 flex items-center justify-center">
+                                <TrendingUp className="w-5 h-5 text-[#10B981]" />
                             </div>
                             <div>
-                                <p className="text-2xl font-bold text-[#0F172A] dark:text-[#F1F5F9]">
+                                <p className="text-xl font-bold text-[#0F172A] dark:text-[#F1F5F9]">
                                     {stats.totalUnits}
                                 </p>
-                                <p className="text-sm text-[#64748B]">Unidades</p>
+                                <p className="text-xs text-[#64748B]">Unidades</p>
                             </div>
                         </div>
                     </CardContent>
                 </Card>
 
                 <Card>
-                    <CardContent className="p-5">
-                        <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-500/20 flex items-center justify-center">
-                                <AlertTriangle className="w-6 h-6 text-[#F59E0B]" />
+                    <CardContent className="p-4">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-500/20 flex items-center justify-center">
+                                <AlertTriangle className="w-5 h-5 text-[#F59E0B]" />
                             </div>
                             <div>
-                                <p className="text-2xl font-bold text-[#0F172A] dark:text-[#F1F5F9]">
+                                <p className="text-xl font-bold text-[#0F172A] dark:text-[#F1F5F9]">
                                     {stats.expiringSoon}
                                 </p>
-                                <p className="text-sm text-[#64748B]">Por vencer</p>
+                                <p className="text-xs text-[#64748B]">Por vencer</p>
                             </div>
                         </div>
                     </CardContent>
                 </Card>
 
                 <Card>
-                    <CardContent className="p-5">
-                        <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-red-100 dark:bg-red-500/20 flex items-center justify-center">
-                                <Calendar className="w-6 h-6 text-[#EF4444]" />
+                    <CardContent className="p-4">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-500/20 flex items-center justify-center">
+                                <Calendar className="w-5 h-5 text-[#EF4444]" />
                             </div>
                             <div>
-                                <p className="text-2xl font-bold text-[#0F172A] dark:text-[#F1F5F9]">
+                                <p className="text-xl font-bold text-[#0F172A] dark:text-[#F1F5F9]">
                                     {stats.expired}
                                 </p>
-                                <p className="text-sm text-[#64748B]">Vencidos</p>
+                                <p className="text-xs text-[#64748B]">Vencidos</p>
                             </div>
                         </div>
                     </CardContent>
@@ -198,33 +198,33 @@ export default function DashboardPage() {
             {/* Alerts Section */}
             {alertProducts.length > 0 && (
                 <Card>
-                    <CardContent className="p-6">
-                        <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-lg font-semibold text-[#0F172A] dark:text-[#F1F5F9]">
-                                ⚠️ Alertas de Vencimiento
+                    <CardContent className="p-4">
+                        <div className="flex items-center justify-between mb-3">
+                            <h2 className="text-base font-semibold text-[#0F172A] dark:text-[#F1F5F9]">
+                                ⚠️ Alertas
                             </h2>
-                            <span className="text-sm text-[#64748B]">
-                                Alerta: {alertMonths} meses
+                            <span className="text-xs text-[#64748B]">
+                                {alertMonths} meses
                             </span>
                         </div>
-                        <div className="space-y-3">
+                        <div className="space-y-2">
                             {alertProducts.slice(0, 5).map((product) => (
                                 <div
                                     key={product.id}
-                                    className="flex items-center justify-between p-3 bg-[#F8FAFC] dark:bg-[#0F172A] rounded-xl"
+                                    className="flex items-center justify-between p-2.5 bg-[#F8FAFC] dark:bg-[#0F172A] rounded-lg"
                                 >
                                     <div>
-                                        <p className="font-medium text-[#0F172A] dark:text-[#F1F5F9]">
+                                        <p className="text-sm font-medium text-[#0F172A] dark:text-[#F1F5F9]">
                                             {product.product_name}
                                         </p>
-                                        <p className="text-sm text-[#64748B]">
-                                            Código: {product.product_code || 'N/A'}
+                                        <p className="text-xs text-[#64748B]">
+                                            {product.product_code || 'N/A'}
                                         </p>
                                     </div>
                                     <div className="text-right">
                                         <StatusBadge status={product.expiration_status as ExpirationStatus} />
-                                        <p className="text-xs text-[#64748B] mt-1">
-                                            {format(new Date(product.expiration_date), "dd MMM yyyy", { locale: es })}
+                                        <p className="text-[10px] text-[#64748B] mt-0.5">
+                                            {format(new Date(product.expiration_date), "dd MMM yy", { locale: es })}
                                         </p>
                                     </div>
                                 </div>
@@ -232,9 +232,9 @@ export default function DashboardPage() {
                         </div>
                         {alertProducts.length > 5 && (
                             <Link href="/inventory?filter=alerts">
-                                <Button variant="ghost" className="w-full mt-4">
+                                <Button variant="ghost" size="sm" className="w-full mt-2 h-8 text-xs">
                                     Ver todos ({alertProducts.length})
-                                    <ArrowRight className="w-4 h-4 ml-2" />
+                                    <ArrowRight className="w-3 h-3 ml-2" />
                                 </Button>
                             </Link>
                         )}
@@ -244,32 +244,32 @@ export default function DashboardPage() {
 
             {/* Recent Products */}
             <Card>
-                <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-4">
-                        <h2 className="text-lg font-semibold text-[#0F172A] dark:text-[#F1F5F9]">
-                            Productos Recientes
+                <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-3">
+                        <h2 className="text-base font-semibold text-[#0F172A] dark:text-[#F1F5F9]">
+                            Recientes
                         </h2>
                         <Link href="/inventory">
-                            <Button variant="ghost" size="sm">
+                            <Button variant="ghost" size="sm" className="h-8 text-xs">
                                 Ver todo
-                                <ArrowRight className="w-4 h-4 ml-2" />
+                                <ArrowRight className="w-3 h-3 ml-2" />
                             </Button>
                         </Link>
                     </div>
 
                     {recentProducts.length === 0 ? (
-                        <div className="text-center py-12">
-                            <Package className="w-16 h-16 text-[#E2E8F0] dark:text-[#334155] mx-auto mb-4" />
-                            <h3 className="text-lg font-medium text-[#0F172A] dark:text-[#F1F5F9] mb-2">
+                        <div className="text-center py-8">
+                            <Package className="w-12 h-12 text-[#E2E8F0] dark:text-[#334155] mx-auto mb-3" />
+                            <h3 className="text-base font-medium text-[#0F172A] dark:text-[#F1F5F9] mb-1">
                                 Sin productos aún
                             </h3>
-                            <p className="text-[#64748B] mb-4">
+                            <p className="text-sm text-[#64748B] mb-3">
                                 Comienza escaneando tu primer producto
                             </p>
                             <Link href="/scan">
-                                <Button>
-                                    <ScanLine className="w-5 h-5 mr-2" />
-                                    Comenzar a escanear
+                                <Button size="sm">
+                                    <ScanLine className="w-4 h-4 mr-2" />
+                                    Comenzar
                                 </Button>
                             </Link>
                         </div>
@@ -277,29 +277,29 @@ export default function DashboardPage() {
                         <div className="overflow-x-auto">
                             <table className="w-full">
                                 <thead>
-                                    <tr className="text-left text-sm text-[#64748B]">
-                                        <th className="pb-3 font-medium">Producto</th>
-                                        <th className="pb-3 font-medium text-right">Cantidad</th>
-                                        <th className="pb-3 font-medium text-right hidden sm:table-cell">
-                                            Última actualización
+                                    <tr className="text-left text-xs text-[#64748B]">
+                                        <th className="pb-2 font-medium">Producto</th>
+                                        <th className="pb-2 font-medium text-right">Cant.</th>
+                                        <th className="pb-2 font-medium text-right hidden sm:table-cell">
+                                            Fecha
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-[#E2E8F0] dark:divide-[#334155]">
                                     {recentProducts.map((product) => (
                                         <tr key={product.id}>
-                                            <td className="py-3">
-                                                <p className="font-medium text-[#0F172A] dark:text-[#F1F5F9]">
+                                            <td className="py-2.5">
+                                                <p className="text-sm font-medium text-[#0F172A] dark:text-[#F1F5F9]">
                                                     {product.product_name}
                                                 </p>
                                             </td>
-                                            <td className="py-3 text-right">
-                                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-[#0066CC]">
+                                            <td className="py-2.5 text-right">
+                                                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-[#0066CC]">
                                                     {product.total_quantity}
                                                 </span>
                                             </td>
-                                            <td className="py-3 text-right text-sm text-[#64748B] hidden sm:table-cell">
-                                                {format(new Date(product.last_updated), "dd MMM yyyy", { locale: es })}
+                                            <td className="py-2.5 text-right text-xs text-[#64748B] hidden sm:table-cell">
+                                                {format(new Date(product.last_updated), "dd MMM yy", { locale: es })}
                                             </td>
                                         </tr>
                                     ))}

@@ -227,18 +227,18 @@ export default function ScanPage() {
     };
 
     return (
-        <div className="max-w-lg mx-auto space-y-6">
+        <div className="max-w-lg mx-auto space-y-4">
             {loading && <LoadingOverlay text="Procesando..." />}
 
             {/* Success overlay */}
             {showSuccess && (
                 <div className="fixed inset-0 bg-green-500/20 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in">
-                    <div className="bg-white dark:bg-[#1E293B] rounded-2xl p-8 shadow-2xl text-center">
-                        <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
-                        <h3 className="text-xl font-bold text-[#0F172A] dark:text-[#F1F5F9]">
-                            ¡Unidad registrada!
+                    <div className="bg-white dark:bg-[#1E293B] rounded-2xl p-6 shadow-2xl text-center">
+                        <CheckCircle2 className="w-12 h-12 text-green-500 mx-auto mb-3" />
+                        <h3 className="text-lg font-bold text-[#0F172A] dark:text-[#F1F5F9]">
+                            ¡Registrado!
                         </h3>
-                        <p className="text-[#64748B] mt-2">
+                        <p className="text-sm text-[#64748B] mt-1">
                             Total: {unitsScanned} {unitsScanned === 1 ? 'unidad' : 'unidades'}
                         </p>
                     </div>
@@ -247,13 +247,13 @@ export default function ScanPage() {
 
             {/* Header */}
             <div>
-                <h1 className="text-2xl font-bold text-[#0F172A] dark:text-[#F1F5F9]">
-                    Escanear Productos
+                <h1 className="text-xl font-bold text-[#0F172A] dark:text-[#F1F5F9]">
+                    Escanear
                 </h1>
-                <p className="text-[#64748B] mt-1">
+                <p className="text-sm text-[#64748B] mt-0.5">
                     {step === 'product'
-                        ? 'Ingresa el nombre del producto'
-                        : `Escaneando: ${productName}`}
+                        ? 'Ingresa nombre'
+                        : `Producto: ${productName}`}
                 </p>
             </div>
 
@@ -265,10 +265,10 @@ export default function ScanPage() {
             {/* Step: Product Name */}
             {step === 'product' && (
                 <Card>
-                    <CardContent className="p-6">
-                        <form onSubmit={handleProductSubmit} className="space-y-4">
-                            <div className="w-20 h-20 bg-blue-100 dark:bg-blue-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                                <Package className="w-10 h-10 text-[#0066CC]" />
+                    <CardContent className="p-4">
+                        <form onSubmit={handleProductSubmit} className="space-y-3">
+                            <div className="w-16 h-16 bg-blue-100 dark:bg-blue-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                <Package className="w-8 h-8 text-[#0066CC]" />
                             </div>
 
                             <Input
@@ -281,9 +281,9 @@ export default function ScanPage() {
                                 required
                             />
 
-                            <Button type="submit" className="w-full" size="lg">
-                                Comenzar a Escanear
-                                <ArrowRight className="w-5 h-5 ml-2" />
+                            <Button type="submit" className="w-full" size="default">
+                                Escanear
+                                <ArrowRight className="w-4 h-4 ml-2" />
                             </Button>
                         </form>
                     </CardContent>
@@ -293,7 +293,7 @@ export default function ScanPage() {
             {/* Step: Camera Scanning */}
             {step === 'scanning' && (
                 <Card>
-                    <CardContent className="p-6">
+                    <CardContent className="p-3">
                         <CameraCapture
                             onCapture={handleImageCapture}
                             onCancel={() => setStep('product')}
@@ -319,38 +319,39 @@ export default function ScanPage() {
 
             {/* Finalize Button (when units > 0) */}
             {step !== 'product' && unitsScanned > 0 && (
-                <div className="space-y-3">
+                <div className="space-y-2">
                     <Button
                         onClick={handleFinalizeProduct}
                         variant="secondary"
-                        className="w-full"
-                        size="lg"
+                        className="w-full text-sm"
+                        size="default"
                         disabled={loading}
                     >
-                        <CheckCircle2 className="w-5 h-5 mr-2" />
-                        Finalizar Producto ({unitsScanned} {unitsScanned === 1 ? 'unidad' : 'unidades'})
+                        <CheckCircle2 className="w-4 h-4 mr-2" />
+                        Finalizar ({unitsScanned})
                     </Button>
 
                     <Button
                         onClick={handleNewProduct}
                         variant="ghost"
-                        className="w-full"
+                        className="w-full text-xs"
+                        size="sm"
                         disabled={loading}
                     >
-                        <XCircle className="w-5 h-5 mr-2" />
-                        Cancelar y Nuevo Producto
+                        <XCircle className="w-4 h-4 mr-2" />
+                        Cancelar y Nuevo
                     </Button>
                 </div>
             )}
 
             {/* Quick Tips */}
             {step === 'scanning' && (
-                <div className="bg-blue-50 dark:bg-blue-500/10 rounded-xl p-4 text-sm text-[#0066CC]">
-                    <p className="font-medium mb-2">💡 Consejos para mejor escaneo:</p>
-                    <ul className="space-y-1 text-[#64748B]">
-                        <li>• Asegúrate de tener buena iluminación</li>
-                        <li>• Enfoca la fecha de vencimiento y código</li>
-                        <li>• Mantén la cámara estable</li>
+                <div className="bg-blue-50 dark:bg-blue-500/10 rounded-lg p-3 text-xs text-[#0066CC]">
+                    <p className="font-medium mb-1">💡 Tips:</p>
+                    <ul className="space-y-0.5 text-[#64748B]">
+                        <li>• Buena iluminación</li>
+                        <li>• Enfoca fecha y lote</li>
+                        <li>• Cámara estable</li>
                     </ul>
                 </div>
             )}

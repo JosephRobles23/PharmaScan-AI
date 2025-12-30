@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState, useCallback, useEffect } from 'react';
-import { Camera, RotateCcw, Image as ImageIcon, X, Plus, Trash2, CheckCircle2 } from 'lucide-react';
+import { Camera, RotateCcw, Image as ImageIcon, X, Plus, Trash2, CheckCircle2, Zap, ZapOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils/cn';
 
@@ -17,6 +17,9 @@ export function CameraCapture({ onCapture, onCancel, disabled }: CameraCapturePr
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [stream, setStream] = useState<MediaStream | null>(null);
     const [error, setError] = useState<string | null>(null);
+
+    // Flash state
+    const [flashOn, setFlashOn] = useState(false);
 
     // Multi-image state
     const [capturedImages, setCapturedImages] = useState<string[]>([]);
@@ -35,6 +38,7 @@ export function CameraCapture({ onCapture, onCancel, disabled }: CameraCapturePr
 
             setStream(mediaStream);
             setCameraActive(true);
+            setFlashOn(false); // Reset flash state on new start
         } catch (err) {
             console.error('Camera error:', err);
             // Handle permission denied or other errors explicitly
@@ -45,6 +49,27 @@ export function CameraCapture({ onCapture, onCancel, disabled }: CameraCapturePr
             }
         }
     }, []);
+
+    const toggleFlash = useCallback(async () => {
+        if (!stream) return;
+        const track = stream.getVideoTracks()[0];
+        try {
+            // Check if torch is supported
+            const capabilities = track.getCapabilities() as any;
+            if (!capabilities.torch) {
+                console.warn('Torch not supported on this device');
+                return;
+            }
+
+            await track.applyConstraints({
+                advanced: [{ torch: !flashOn } as any] // Cast to any because torch is not standard in all TS definitions
+            });
+            setFlashOn(!flashOn);
+        } catch (err) {
+            console.error('Error toggling flash:', err); { }
+        }
+    }, [stream, flashOn]);
+
 
     // Effect to attach stream to video element when it becomes available
     useEffect(() => {
@@ -63,6 +88,7 @@ export function CameraCapture({ onCapture, onCancel, disabled }: CameraCapturePr
             setStream(null);
         }
         setCameraActive(false);
+        setFlashOn(false);
     }, [stream]);
 
     const captureImage = useCallback(() => {
@@ -225,6 +251,15 @@ export function CameraCapture({ onCapture, onCancel, disabled }: CameraCapturePr
                         >
                             <Camera className="w-6 h-6 mr-2" />
                             {capturedImages.length < 3 ? 'Capturar' : 'Máximo alcanzado'}
+                        </Button>
+
+                        <Button
+                            variant={flashOn ? "primary" : "secondary"}
+                            onClick={toggleFlash}
+                            disabled={disabled}
+                            className="flex-shrink-0"
+                        >
+                            {flashOn ? <Zap className="w-5 h-5 text-yellow-400" /> : <ZapOff className="w-5 h-5" />}
                         </Button>
                     </div>
 
