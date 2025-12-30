@@ -13,7 +13,11 @@ export const metadata: Metadata = {
   keywords: ["farmacia", "inventario", "OCR", "escaneo", "vencimiento", "gestión"],
   authors: [{ name: "PharmaScan AI" }],
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
-  themeColor: "#0066CC",
+  themeColor: "#000000",
+  icons: {
+    icon: '/pharmascan-logo.png',
+    apple: '/pharmascan-logo.png',
+  },
 };
 
 export default function RootLayout({

@@ -231,7 +231,7 @@ export default function SettingsPage() {
                                 }`}
                         >
                             <span
-                                className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow transition-transform ${voiceEnabled ? 'translate-x-7' : 'translate-x-1'
+                                className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow transition-transform ${voiceEnabled ? 'translate-x-0' : 'translate-x-[-24px]'
                                     }`}
                             />
                         </button>

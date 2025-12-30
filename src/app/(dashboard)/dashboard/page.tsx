@@ -32,13 +32,19 @@ export default function DashboardPage() {
     const [recentProducts, setRecentProducts] = useState<ProductSummary[]>([]);
     const [alertProducts, setAlertProducts] = useState<ProductUnit[]>([]);
     const [alertMonths, setAlertMonths] = useState(3);
+    const [userName, setUserName] = useState<string | null>(null);
 
     useEffect(() => {
         const loadData = async () => {
             try {
-                // Get user settings
+                // Get user user
                 const { data: { user } } = await supabase.auth.getUser();
                 if (!user) return;
+
+                // Extract first name from metadata or email
+                const fullName = user.user_metadata?.full_name || user.user_metadata?.name || '';
+                const firstName = fullName.split(' ')[0] || user.email?.split('@')[0] || 'Usuario';
+                setUserName(firstName);
 
                 const { data: settings } = await supabase
                     .from('user_settings')
@@ -50,6 +56,7 @@ export default function DashboardPage() {
                     setAlertMonths(settings.expiration_alert_months);
                 }
 
+                // ... keep existing data fetching logic ...
                 // Get product summaries
                 const { data: products } = await supabase
                     .from('products_summary')
@@ -106,11 +113,11 @@ export default function DashboardPage() {
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-[#0F172A] dark:text-[#F1F5F9]">
-                        Panel de Control
+                    <h1 className="text-3xl font-bold text-black dark:text-white tracking-tight">
+                        Hola, {userName} 👋
                     </h1>
-                    <p className="text-[#64748B] mt-1">
-                        Resumen de tu inventario farmacéutico
+                    <p className="text-[#8E8E93] mt-1">
+                        Aquí tienes el resumen de tu inventario
                     </p>
                 </div>
                 <Link href="/scan">

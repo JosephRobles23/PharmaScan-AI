@@ -12,8 +12,8 @@ export function Card({ children, className }: CardProps) {
     return (
         <div
             className={cn(
-                'bg-white dark:bg-[#1E293B] rounded-2xl border border-[#E2E8F0] dark:border-[#334155]',
-                'shadow-lg shadow-black/5',
+                'bg-white dark:bg-[#282828] rounded-2xl border border-[#E2E8F0] dark:border-[#334155]',
+                'shadow-xl shadow-black',
                 className
             )}
         >

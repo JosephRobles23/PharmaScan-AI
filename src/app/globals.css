@@ -1,22 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand Colors */
-  --primary: #0066CC;
-  --primary-dark: #004C99;
-  --primary-light: #3399FF;
-  
+  /* iOS-like Monochrome Palette */
+
+  /* Primary Action Color (iOS Blue) */
+  --primary: #007AFF;
+  --primary-dark: #0056B3;
+  --primary-light: #5AC8FA;
+
   /* Status Colors */
-  --success: #10B981;
-  --warning: #F59E0B;
-  --danger: #EF4444;
-  
-  /* Neutrals */
-  --background: #F8FAFC;
-  --foreground: #0F172A;
+  --success: #34C759;
+  --warning: #FFCC00;
+  --danger: #FF3B30;
+
+  /* Neutrals (Light Mode) */
+  --background: #F2F2F7;
+  /* iOS System Grouped Background */
+  --foreground: #000000;
   --card: #FFFFFF;
-  --muted: #64748B;
-  --border: #E2E8F0;
+  --muted: #8E8E93;
+  --border: #C5C5C7;
+  /* iOS Separator */
 }
 
 @theme inline {
@@ -31,16 +35,18 @@
   --color-card: var(--card);
   --color-muted: var(--muted);
   --color-border: var(--border);
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0F172A;
-    --foreground: #F1F5F9;
-    --card: #1E293B;
-    --muted: #94A3B8;
-    --border: #334155;
+    /* Neutrals (Dark Mode) */
+    --background: #000000;
+    --foreground: #FFFFFF;
+    --card: #1C1C1E;
+    /* iOS Dark Mode Card */
+    --muted: #98989D;
+    --border: #38383A;
   }
 }
 
@@ -81,6 +87,7 @@ body {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -88,9 +95,12 @@ body {
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
@@ -100,6 +110,7 @@ body {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
