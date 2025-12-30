@@ -230,7 +230,6 @@ export function CameraCapture({ onCapture, onCancel, disabled }: CameraCapturePr
 
                     {capturedImages.length > 0 && (
                         <Button
-                            variant="default"
                             className="w-full bg-green-600 hover:bg-green-700 text-white"
                             onClick={confirmCapture}
                         >
