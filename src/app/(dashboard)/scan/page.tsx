@@ -281,7 +281,7 @@ export default function ScanPage() {
                                 required
                             />
 
-                            <Button type="submit" className="w-full" size="default">
+                            <Button type="submit" className="w-full">
                                 Escanear
                                 <ArrowRight className="w-4 h-4 ml-2" />
                             </Button>
@@ -324,7 +324,6 @@ export default function ScanPage() {
                         onClick={handleFinalizeProduct}
                         variant="secondary"
                         className="w-full text-sm"
-                        size="default"
                         disabled={loading}
                     >
                         <CheckCircle2 className="w-4 h-4 mr-2" />

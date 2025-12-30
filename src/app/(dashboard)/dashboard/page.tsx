@@ -121,7 +121,7 @@ export default function DashboardPage() {
                     </p>
                 </div>
                 <Link href="/scan">
-                    <Button size="default">
+                    <Button>
                         <ScanLine className="w-4 h-4 mr-2" />
                         Nuevo Escaneo
                     </Button>
