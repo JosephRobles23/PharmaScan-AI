@@ -143,7 +143,7 @@ export default function Aurora(props: AuroraProps) {
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA)
     gl.canvas.style.backgroundColor = "transparent"
 
-    let program
+    let program: Program
 
     function resize() {
       const width = window.innerWidth
@@ -183,7 +183,7 @@ export default function Aurora(props: AuroraProps) {
     resize()
 
     let animateId = 0
-    const update = (t) => {
+    const update = (t: number) => {
       animateId = requestAnimationFrame(update)
       const { time = t * 0.01, speed = 1.0 } = propsRef.current
       program.uniforms.uTime.value = time * speed * 0.1
